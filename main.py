@@ -54,7 +54,7 @@ def inference(representative_claim:str,judge:str | None = None,
     base_path=Path(__file__).resolve(strict=True).parent
     #print("base_path",base_path)
 
-    tokenizers_files_path =base_path+'/tokenizer_files'
+    tokenizers_files_path =base_path+"/tokenizer_files"
     output_path = base_path+"/setfitonnx_model.onnx"
     
     tokenizer = AutoTokenizer.from_pretrained(tokenizers_files_path)
