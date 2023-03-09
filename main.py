@@ -54,8 +54,8 @@ def inference(representative_claim:str,judge:str | None = None,
     base_path=Path(__file__).resolve(strict=True).parent
     #print("base_path",base_path)
 
-    tokenizers_files_path =base_path+"/tokenizer_files"
-    output_path = base_path+"/setfitonnx_model.onnx"
+    tokenizers_files_path =str(base_path)+"/tokenizer_files"
+    output_path = str(base_path)+"/setfitonnx_model.onnx"
     
     tokenizer = AutoTokenizer.from_pretrained(tokenizers_files_path)
     inputs = tokenizer(
@@ -77,16 +77,16 @@ def inference(representative_claim:str,judge:str | None = None,
 
 
     # load dictionary
-    with open(base_path+'/judge_conf.pkl', 'rb') as fp:
+    with open(str(base_path)+"/judge_conf.pkl", 'rb') as fp:
         judge_conf = pickle.load(fp)
 
-    with open(base_path+'/eligible_per_judge.pkl', 'rb') as fp:
+    with open(str(base_path)+"/eligible_per_judge.pkl", 'rb') as fp:
         eligible_per_judge = pickle.load(fp)
 
-    with open(base_path+'/court_conf.pkl', 'rb') as fp:
+    with open(str(base_path)+"/court_conf.pkl", 'rb') as fp:
         court_conf = pickle.load(fp)
     
-    with open(base_path+'/eligible_per_court.pkl', 'rb') as fp:
+    with open(str(base_path)+"/eligible_per_court.pkl", 'rb') as fp:
         eligible_per_court = pickle.load(fp)
 
     judges=list(judge_conf.keys())
@@ -108,7 +108,7 @@ def inference(representative_claim:str,judge:str | None = None,
       
       
         xgb_model = xgb.XGBClassifier(max_depth = 3, learning_rate=0.05,n_estimators=100,verposity=3,objective="binary:logistic", random_state=42)
-        xgb_model.load_model(base_path+"xgb_model.json")  
+        xgb_model.load_model(str(base_path)+"/xgb_model.json")  
         model_prediction=xgb_model.predict(model_input)
         return json.dumps({"succcess":True,"result":model_prediction.item()})
     
