@@ -50,12 +50,12 @@ def inference(representative_claim:str,judge:str | None = None,
             court:str | None = None):    
     # import onnx
     
-    base_path=""
-    #base_path=Path(__file__).resolve(strict=True).parent
+    #base_path=""
+    base_path=Path(__file__).resolve(strict=True).parent
     #print("base_path",base_path)
 
-    tokenizers_files_path =base_path+'tokenizer_files'
-    output_path = base_path+"setfitonnx_model.onnx"
+    tokenizers_files_path =base_path+'/tokenizer_files'
+    output_path = base_path+"/setfitonnx_model.onnx"
     
     tokenizer = AutoTokenizer.from_pretrained(tokenizers_files_path)
     inputs = tokenizer(
@@ -77,16 +77,16 @@ def inference(representative_claim:str,judge:str | None = None,
 
 
     # load dictionary
-    with open(base_path+'judge_conf.pkl', 'rb') as fp:
+    with open(base_path+'/judge_conf.pkl', 'rb') as fp:
         judge_conf = pickle.load(fp)
 
-    with open(base_path+'eligible_per_judge.pkl', 'rb') as fp:
+    with open(base_path+'/eligible_per_judge.pkl', 'rb') as fp:
         eligible_per_judge = pickle.load(fp)
 
-    with open(base_path+'court_conf.pkl', 'rb') as fp:
+    with open(base_path+'/court_conf.pkl', 'rb') as fp:
         court_conf = pickle.load(fp)
     
-    with open(base_path+'eligible_per_court.pkl', 'rb') as fp:
+    with open(base_path+'/eligible_per_court.pkl', 'rb') as fp:
         eligible_per_court = pickle.load(fp)
 
     judges=list(judge_conf.keys())
